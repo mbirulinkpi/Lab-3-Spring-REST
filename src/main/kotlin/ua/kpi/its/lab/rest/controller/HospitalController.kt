@@ -4,10 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import ua.kpi.its.lab.rest.dto.HospitalRequestDto
-import ua.kpi.its.lab.rest.dto.HospitalResponseDto
+import ua.kpi.its.lab.rest.dto.HospitalRequest
+import ua.kpi.its.lab.rest.dto.HospitalResponse
 import ua.kpi.its.lab.rest.exception.ResourceNotFoundException
-import javax.validation.Valid
 
 
 @RestController
@@ -33,26 +32,26 @@ public class HospitalController {
     }
 
     @GetMapping("/")
-    open fun getAllHospitals(): ResponseEntity<MutableList<HospitalResponseDto?>?>? {
-        val hospitalResponseDtos: kotlin.collections.List<HospitalResponseDto> = hospitalService.getAllHospitals()
-        return ResponseEntity.ok<kotlin.collections.List<HospitalResponseDto>>(hospitalResponseDtos)
+    open fun getAllHospitals(): ResponseEntity<MutableList<HospitalResponse?>?>? {
+        val hospitalResponseDtos: kotlin.collections.List<HospitalResponse> = hospitalService.getAllHospitals()
+        return ResponseEntity.ok<kotlin.collections.List<HospitalResponse>>(hospitalResponseDtos)
     }
 
     @PostMapping("/")
-    fun createHospital(@Valid @RequestBody hospitalRequestDto: HospitalRequestDto?): ResponseEntity<HospitalResponseDto>? {
-        val hospitalResponseDto: HospitalResponseDto = hospitalService.createHospital(hospitalRequestDto)
-        return ResponseEntity.status(HttpStatus.CREATED).body<HospitalResponseDto>(hospitalResponseDto)
+    fun createHospital(@Valid @RequestBody hospitalRequestDto: HospitalRequest?): ResponseEntity<HospitalResponse>? {
+        val hospitalResponseDto: HospitalResponse = hospitalService.createHospital(hospitalRequestDto)
+        return ResponseEntity.status(HttpStatus.CREATED).body<HospitalResponse>(hospitalResponseDto)
     }
 
     @PutMapping("/{id}")
     @Throws(ResourceNotFoundException::class)
     fun updateHospital(
         @PathVariable id: Long,
-        @Valid @RequestBody hospitalRequestDto: HospitalRequestDto?
-    ): ResponseEntity<HospitalResponseDto>? {
-        val hospitalResponseDto: HospitalResponseDto = hospitalService.updateHospital(id, hospitalRequestDto)
+        @Valid @RequestBody hospitalRequestDto: HospitalRequest?
+    ): ResponseEntity<HospitalResponse>? {
+        val hospitalResponseDto: HospitalResponse = hospitalService.updateHospital(id, hospitalRequestDto)
             ?: throw ResourceNotFoundException("Hospital with id $id not found")
-        return ResponseEntity.ok<HospitalResponseDto>(hospitalResponseDto)
+        return ResponseEntity.ok<HospitalResponse>(hospitalResponseDto)
     }
 
     @DeleteMapping("/{id}")

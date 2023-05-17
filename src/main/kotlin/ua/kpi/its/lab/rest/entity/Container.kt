@@ -1,3 +1,4 @@
+import ua.kpi.its.lab.rest.entity.Hospital
 /**
 
 An interface representing a container for storing objects of type T.

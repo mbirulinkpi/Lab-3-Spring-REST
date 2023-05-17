@@ -16,6 +16,9 @@ repositories {
 dependencies {
     // Spring
     implementation("org.springframework:spring-webmvc:6.0.6")
+    implementation("org.springframework.security:spring-security-config:6.0.3")
+    implementation("org.springframework.security:spring-security-web:6.0.3")
+
     // Thymeleaf
     implementation("org.thymeleaf:thymeleaf-spring6:3.1.1.RELEASE")
     // Jetty & Servlet API
